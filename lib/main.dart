@@ -1,29 +1,38 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter/services.dart';
 
-void main() => runApp(
-  MaterialApp(
-    home: golfClubApp(),
-  ),
-);
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((_) => runApp(new golfClubApp()));
+}
+ // MaterialApp(
+   // home: golfClubApp(),
+  // ignore: unnecessary_statements
+
 
 class golfClubApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Golf Club Randomizer'),
-        backgroundColor: Colors.green.shade900,
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('images/course.png'),
-            fit: BoxFit.cover,
-            alignment: Alignment.center,
-          ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Golf Club Randomizer'),
+          backgroundColor: Colors.green.shade900,
         ),
-          child: clubRandomizer(),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/course2.png'),
+              fit: BoxFit.cover,
+              alignment: Alignment.center,
+            ),
+          ),
+            child: clubRandomizer(),
+        ),
       ),
     );
   }
@@ -43,87 +52,82 @@ class _clubRandomizerState extends State<clubRandomizer> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        SizedBox(
+          height: 50,
+        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            FlatButton(
+            RaisedButton(
               onPressed: (){
                 setState(() {
                   clubPick = list1[_random.nextInt(list1.length)];
-                  print(list1);
-                  print(list2);
                 });
               },
-              child: Card(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Tee Box',
-                          style: TextStyle(
-                            fontSize: 28.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              //padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(-16.0, 0.0, -16.0, 0.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white
                 ),
+                padding: const EdgeInsets.all(10.0),
+                child:
+                const Text('Tee Box', style: TextStyle(fontSize: 38)),
               ),
-              //child: Image.asset('images/andyO.png'),
             ),
-            FlatButton(
+            RaisedButton(
               onPressed: (){
                 setState(() {
-                  clubPick = list1[_random.nextInt(list1.length)];
-                  print(list1);
-                  print(list2);
+                  clubPick = list2[_random.nextInt(list2.length)];
                 });
               },
-              child: Card(
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(18.0),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('Fairway',
-                          style: TextStyle(
-                            fontSize: 28.0,
-                          ),
-                        ),
-                      ],
-                    ),
+                //padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.fromLTRB(-16.0, 0.0, -16.0, 0.0),
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: Colors.white
                   ),
+                  padding: const EdgeInsets.all(10.0),
+                  child:
+                  const Text('Fairway', style: TextStyle(fontSize: 38)),
                 ),
               ),
-              //child: Image.asset('images/andyO.png'),
-            ),
           ],
+        ),
+        Divider(
+          color: Colors.grey.shade50,
+          height: 25,
+          indent: 20,
+          endIndent: 20,
+          thickness: 2,
         ),
         Card(
           color: Colors.grey.shade100,
-          margin: EdgeInsets.symmetric(vertical: 25.0, horizontal: 140.0),
+          margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 85.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(clubPick,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                  ),
-                ],
+            child: ListTile(
+              leading: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 34,
+                  maxHeight: 34,
+                ),
+                child: Image.asset('images/golfClub.png', fit: BoxFit.cover),
+              ),
+              title: Center(
+                child: Text(clubPick,
+                style: TextStyle(
+                  fontSize: 28.0,
+                ),
+                ),
               ),
             ),
           ),
         ),
-        FlatButton(
+        SizedBox(
+          height: 20,
+        ),
+        RaisedButton(
           onPressed: (){
             setState(() {
               list1.remove(clubPick);
@@ -131,26 +135,16 @@ class _clubRandomizerState extends State<clubRandomizer> {
               clubPick = list1[_random.nextInt(list1.length)];
             });
           },
-          child: Card(
-            margin: EdgeInsets.symmetric(vertical: 0.0, horizontal: 150.0),
-            color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Remove Club',
-                      style: TextStyle(
-                        fontSize: 10.0,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+          //textColor: Colors.white,
+          padding: const EdgeInsets.all(0.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              color: Colors.red
             ),
+            padding: const EdgeInsets.all(10.0),
+            child:
+            const Text('Remove Club', style: TextStyle(fontSize: 20)),
           ),
-          //child: Image.asset('images/andyO.png'),
         ),
       ],
     );
