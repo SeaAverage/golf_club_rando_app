@@ -5,13 +5,12 @@ import 'package:flutter/services.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((_) => runApp(new golfClubApp()));
 }
- // MaterialApp(
-   // home: golfClubApp(),
-  // ignore: unnecessary_statements
-
+// MaterialApp(
+// home: golfClubApp(),
+// ignore: unnecessary_statements
 
 class golfClubApp extends StatelessWidget {
   @override
@@ -31,7 +30,7 @@ class golfClubApp extends StatelessWidget {
               alignment: Alignment.center,
             ),
           ),
-            child: clubRandomizer(),
+          child: clubRandomizer(),
         ),
       ),
     );
@@ -42,9 +41,41 @@ class clubRandomizer extends StatefulWidget {
   @override
   _clubRandomizerState createState() => _clubRandomizerState();
 }
+
 class _clubRandomizerState extends State<clubRandomizer> {
-  var list1 = ['Driver', '3 Wood', '5 Wood', '4 Hybrid', '3 Iron', '4 Iron', '5 Iron', '6 Iron', '7 Iron', '8 Iron', '9 Iron', 'PW', 'GW/SW', '56° Wedge', '60° Wedge'];
-  var list2 = ['3 Wood', '5 Wood', '4 Hybrid', '3 Iron', '4 Iron', '5 Iron', '6 Iron', '7 Iron', '8 Iron', '9 Iron', 'PW', 'GW/SW', '56° Wedge', '60° Wedge'];
+  var list1 = [
+    'Driver',
+    '3 Wood',
+    '5 Wood',
+    '4 Hybrid',
+    '3 Iron',
+    '4 Iron',
+    '5 Iron',
+    '6 Iron',
+    '7 Iron',
+    '8 Iron',
+    '9 Iron',
+    'PW',
+    'GW/SW',
+    '56° Wedge',
+    '60° Wedge'
+  ];
+  var list2 = [
+    '3 Wood',
+    '5 Wood',
+    '4 Hybrid',
+    '3 Iron',
+    '4 Iron',
+    '5 Iron',
+    '6 Iron',
+    '7 Iron',
+    '8 Iron',
+    '9 Iron',
+    'PW',
+    'GW/SW',
+    '56° Wedge',
+    '60° Wedge'
+  ];
   var _random = new Random();
   var clubPick = '';
   @override
@@ -59,7 +90,7 @@ class _clubRandomizerState extends State<clubRandomizer> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             RaisedButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   clubPick = list1[_random.nextInt(list1.length)];
                 });
@@ -67,31 +98,25 @@ class _clubRandomizerState extends State<clubRandomizer> {
               //padding: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.fromLTRB(-16.0, 0.0, -16.0, 0.0),
               child: Container(
-                decoration: const BoxDecoration(
-                    color: Colors.white
-                ),
+                decoration: const BoxDecoration(color: Colors.white),
                 padding: const EdgeInsets.all(10.0),
-                child:
-                const Text('Tee Box', style: TextStyle(fontSize: 38)),
+                child: const Text('Tee Box', style: TextStyle(fontSize: 38)),
               ),
             ),
             RaisedButton(
-              onPressed: (){
+              onPressed: () {
                 setState(() {
                   clubPick = list2[_random.nextInt(list2.length)];
                 });
               },
-                //padding: const EdgeInsets.all(10.0),
-                padding: const EdgeInsets.fromLTRB(-16.0, 0.0, -16.0, 0.0),
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.white
-                  ),
-                  padding: const EdgeInsets.all(10.0),
-                  child:
-                  const Text('Fairway', style: TextStyle(fontSize: 38)),
-                ),
+              //padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.fromLTRB(-16.0, 0.0, -16.0, 0.0),
+              child: Container(
+                decoration: const BoxDecoration(color: Colors.white),
+                padding: const EdgeInsets.all(10.0),
+                child: const Text('Fairway', style: TextStyle(fontSize: 38)),
               ),
+            ),
           ],
         ),
         Divider(
@@ -115,10 +140,11 @@ class _clubRandomizerState extends State<clubRandomizer> {
                 child: Image.asset('images/golfClub.png', fit: BoxFit.cover),
               ),
               title: Center(
-                child: Text(clubPick,
-                style: TextStyle(
-                  fontSize: 28.0,
-                ),
+                child: Text(
+                  clubPick,
+                  style: TextStyle(
+                    fontSize: 24.0,
+                  ),
                 ),
               ),
             ),
@@ -128,7 +154,7 @@ class _clubRandomizerState extends State<clubRandomizer> {
           height: 20,
         ),
         RaisedButton(
-          onPressed: (){
+          onPressed: () {
             setState(() {
               list1.remove(clubPick);
               list2.remove(clubPick);
@@ -138,12 +164,9 @@ class _clubRandomizerState extends State<clubRandomizer> {
           //textColor: Colors.white,
           padding: const EdgeInsets.all(0.0),
           child: Container(
-            decoration: const BoxDecoration(
-              color: Colors.red
-            ),
+            decoration: const BoxDecoration(color: Colors.red),
             padding: const EdgeInsets.all(10.0),
-            child:
-            const Text('Remove Club', style: TextStyle(fontSize: 20)),
+            child: const Text('Remove Club', style: TextStyle(fontSize: 20)),
           ),
         ),
       ],
